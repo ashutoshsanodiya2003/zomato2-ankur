@@ -1,0 +1,24 @@
+/* Centralized theme variables with system dark-mode support */
+:root {
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --text: #0f1724;
+  --muted: #6b7280;
+  --accent: #0ea5a0;
+  --input-bg: #f3f4f6;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(2,6,23,0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #071023;
+    --card: #0b1220;
+    --text: #e6eef6;
+    --muted: #9aa6b2;
+    --accent: #2dd4bf;
+    --input-bg: #071426;
+    --radius: 12px;
+    --shadow: 0 8px 30px rgba(2,6,23,0.6);
+  }
+}

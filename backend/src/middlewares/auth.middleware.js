@@ -6,17 +6,21 @@ function extractToken(req) {
   // const authHeader = req.headers?.authorization || req.headers?.Authorization;
   const authHeader = req.cookies;
   
-  if (
-    authHeader &&
-    typeof authHeader === "string" &&
-    authHeader.startsWith("Bearer ")
-  ) {
-    return authHeader.split(" ")[1];
+ 
+  // 1️⃣ Cookie se token
+  if (req.cookies && req.cookies.token) {
+    return req.cookies.token;
   }
-  // fallback to cookie 
-  console.log(req.cookies)
-  return req.cookies?.token;
+
+  // 2️⃣ Body se token
+  if (req.body && req.body.token) {
+    return req.body.token;
+  }
+
+  return null;
 }
+
+
 
 async function authFoodPartnerMiddleware(req, res, next) {
   const token = extractToken(req);

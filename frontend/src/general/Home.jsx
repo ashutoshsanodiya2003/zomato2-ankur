@@ -10,7 +10,7 @@ const Home = () => {
   // Fetch videos
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/food', { withCredentials: true })
+      .get('https://zomato2-ankur-backend2.onrender.com/api/food', { withCredentials: true })
       .then(res => {
         if (Array.isArray(res.data.foodItems)) {
           setVideos(res.data.foodItems)

@@ -4,7 +4,7 @@ const userModel = require("../models/user.model");
 
 function extractToken(req) {
   // const authHeader = req.headers?.authorization || req.headers?.Authorization;
-  const authHeader = req.cookies.token;
+  const authHeader = req.cookies;
   
   if (
     authHeader &&

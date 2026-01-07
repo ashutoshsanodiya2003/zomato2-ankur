@@ -11,7 +11,7 @@ const Profile = () => {
   const [errorMsg, setErrorMsg] = useState(null)
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/food-partner/${id}`, { withCredentials: true })
+    axios.get(`https://zomato2-ankur-backend2.onrender.com/api/food-partner/${id}`, { withCredentials: true })
       .then(response => {
         setProfile(response.data.foodPartner)
         setVideos(response.data.foodPartner.foodItems || [])
@@ -19,7 +19,7 @@ const Profile = () => {
       .catch(err => {
         // If the id lookup fails (404), try fetching the logged-in food-partner
         if (err.response && err.response.status === 404) {
-          axios.get(`http://localhost:3000/api/food-partner/me`, { withCredentials: true })
+          axios.get(`https://zomato2-ankur-backend2.onrender.com/api/food-partner/me`, { withCredentials: true })
             .then(resp => {
               setProfile(resp.data.foodPartner)
               setVideos(resp.data.foodPartner.foodItems || [])

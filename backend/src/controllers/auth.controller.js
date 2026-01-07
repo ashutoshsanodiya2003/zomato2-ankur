@@ -36,12 +36,13 @@ const isUserAlreadyExists = await userModel.findOne({ email });
     );
   console.log(token)
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'none',
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  })
+ res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,        // REQUIRED (HTTPS)
+  sameSite: "None",    // REQUIRED (Vercel ↔ Render)
+  maxAge: 24 * 60 * 60 * 1000,
+});
+
 
   res.status(201).json({
     message:"User Registered  successfully",
@@ -67,7 +68,7 @@ async function loginUser(req, res) {
   }
 
   // ✅ Use the correct field name from DB
-  const isPasswordValid =  bcrypt.compare(password, user.password);
+  const isPasswordValid =  await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
     return res.status(400).json({
@@ -81,10 +82,13 @@ async function loginUser(req, res) {
     { expiresIn: "1d" }
   );
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  });
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,        // REQUIRED (HTTPS)
+  sameSite: "None",    // REQUIRED (Vercel ↔ Render)
+  maxAge: 24 * 60 * 60 * 1000,
+});
+
 
   res.status(200).json({
     message: "User login successfully",
@@ -136,12 +140,12 @@ async function registerFoodPartner(req,res) {
     process.env.JWT_SECRET
   )
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'none',
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  })
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,        // REQUIRED (HTTPS)
+  sameSite: "None",    // REQUIRED (Vercel ↔ Render)
+  maxAge: 24 * 60 * 60 * 1000,
+});
 
   res.status(200).json({
     message:"foodPartner registered successfully",
@@ -201,12 +205,13 @@ async function loginFoodPartner(req, res) {
       { expiresIn: "7d" }
     );
 
-    // 🍪 Set cookie
-    res.cookie("token", token, 
-      {httpOnly: true,
-      
-      maxAge: 7 * 24 * 60 * 60 * 1000},
-    );
+   res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,        // REQUIRED (HTTPS)
+  sameSite: "None",    // REQUIRED (Vercel ↔ Render)
+  maxAge: 24 * 60 * 60 * 1000,
+});
+
 
     // ✅ Success response
     return res.status(200).json({

@@ -3,7 +3,8 @@ const foodPartnerModel = require("../models/foodpartner.models");
 const userModel = require("../models/user.model");
 
 function extractToken(req) {
-  const authHeader = req.headers?.authorization || req.headers?.Authorization;
+  // const authHeader = req.headers?.authorization || req.headers?.Authorization;
+  const authHeader = req.cookies.token;
   
   if (
     authHeader &&

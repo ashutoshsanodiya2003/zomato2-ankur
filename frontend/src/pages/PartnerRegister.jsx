@@ -15,7 +15,7 @@ const PartnerRegister = () => {
 
   console.log(businessName)
 
-const response =   await axios.post("http://localhost:3000/api/auth/food-partner/register",{
+const response =   await axios.post("https://zomato2-ankur-backend2.onrender.com/api/auth/food-partner/register",{
     businessName,
     email,
     password
